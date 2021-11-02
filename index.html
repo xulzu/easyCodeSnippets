@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		#app {
+			width: 70%;
+			margin: auto;
+		}
+
+		.content {
+			margin-top: 20px;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+		}
+
+		.document {
+			margin: 40px 0 40px 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<h1 style="margin-top: 10px;	text-align: center;">VSCODE 代码片段格式化工具</h1>
+
+		<div class="content">
+			<span>
+				<h3>输入</h3>
+				<textarea cols="43" rows="13" id="js_input"></textarea>
+			</span>
+			<span style="margin-left: 10px;">
+				<h3 style="text-align: end;">输出</h3>
+				<textarea cols="43" rows="13" disabled id="js_output"></textarea>
+			</span>
+		</div>
+		<div class="document">
+			<h3 style="text-align: right;">使用说明:如何在vscode中定义便捷的代码片段</h3>
+			<ul>
+				<li>
+					步骤一：打开vscode=>点击左上角的「文件」=》 「首选项」=》[代码片段] => 「选择或新建一个文件」 。打开后如下
+					<div>
+						<img src="./img.png" alt="img" width="500px">
+
+					</div>
+				</li>
+				<li>
+					步骤二：在上面的输入框黏贴你需要定义的代码片段，把输出结果整个复制到下面的图中的body里面,注意prefix字段就是用来唤醒某一段代码的
+					<div>
+						<img src="./img1.png" alt="img" width="500px">
+					</div>
+				</li>
+				<li>
+					最后：设置完保存后回到其他文件下输入prefix中的内容，就会弹出只能提醒，选择对应的片段即可
+				</li>
+				<li><a href="https://github.com/xulzu/easyCodeSnippets">Github地址</a> </li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		window.addEventListener('load', () => {
+			const inputEle = document.querySelector('#js_input')
+			const outputEle = document.querySelector('#js_output')
+			inputEle.addEventListener('input', (e) => {
+				outputEle.value = e.target.value.replace(/\"/g, '\\"')
+					.replace(/\t/g, '\\t')
+					.split(/\n/)
+					.map(item => '\"' + item + '\"').join(',')
+			})
+
+		})
+	</script>
+</body>
+
+</html>
